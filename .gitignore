@@ -1,4 +1,17 @@
-*.class
+# IDEA project files
+.idea
+out
+build
+target
+
+#gradle related files and folders
+.gradle
+gradle
+
+#ignore files for project
+*.ipr
+*.iws
+*.iml
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
