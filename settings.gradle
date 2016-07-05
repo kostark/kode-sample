@@ -1,4 +1,5 @@
 rootProject.name = 'kode-sample'
 include 'kode-sample-web'
 include 'kode-sample-sdk'
+include 'kode-boot-jar'
 
