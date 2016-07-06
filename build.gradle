@@ -39,6 +39,7 @@ allprojects {
         mysqlConnector = '5.1.31'
         eclipseLinkVersion = '2.6.2'
         atomikosVersion = '4.0.1'
+        springBootVersion = '1.3.6.RELEASE'
     }
 
     //全局仓库定义
