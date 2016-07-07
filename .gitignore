@@ -4,14 +4,17 @@ out
 build
 target
 
-#gradle related files and folders
+# gradle related files and folders
 .gradle
 gradle
 
-#ignore files for project
+# ignore files for project
 *.ipr
 *.iws
 *.iml
+
+# ignore JRebel config xml
+rebel.xml
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
