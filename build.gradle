@@ -12,7 +12,8 @@ buildscript {
 
     //配置构建脚本内的常量，和项目内的常量定义不能放在一起定义，因为使用范围不一样。
     ext {
-        springBootVersion = '1.4.0.M1'
+        //在 allprojects 中同样有定义
+        springBootVersion = '1.4.0.M3'
     }
 
     repositories {
@@ -32,7 +33,6 @@ allprojects {
     version '1.0'
 
     //所有项目共同引入的插件
-    apply plugin: 'java'
     apply plugin: 'idea'
 
     //扩展属性，通常用于多子项目时各子项目中属性/版本控制，引用该地方属性的字符不能用 <单引号> 引入这里的变量
@@ -53,7 +53,7 @@ allprojects {
         mysqlConnector = '5.1.31'
         eclipseLinkVersion = '2.6.2'
         atomikosVersion = '4.0.1'
-        springBootVersion = '1.4.0.M1'
+        springBootVersion = '1.4.0.M3'
     }
 
     //全局仓库定义
@@ -83,7 +83,7 @@ subprojects {
     //子项目使用的插件
     //java 插件使用之后能够在 dependencies 中使用 compile/testCompile 等方法。
     //避免在父模块中使用 java 插件，因为父项目没有必要生成 parent_main 和 parent_test 模块
-
+    apply plugin: 'java'
     apply plugin: 'spring-boot'
 
     //apply plugin: 'java' 之后才有属性 - 代码源兼容版本
@@ -99,10 +99,6 @@ subprojects {
         compile "org.slf4j:log4j-over-slf4j:${slf4jVersion}"
         compile "ch.qos.logback:logback-classic:${logbackVersion}"
         testCompile "junit:junit:${junitVersion}"
-    }
-
-    project(':kode-boot-jar') {
-
     }
 }
 

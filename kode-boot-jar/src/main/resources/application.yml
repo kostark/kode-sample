@@ -1,0 +1,9 @@
+# 推荐使用 yml 文件，比 properties 文件易于编写
+name: Kode-sample-project
+desc: ${name}, perfect!
+test: I'm test value from application.properties.
+
+# 在配置文件中的读取，从自动装配的库中查找默认配置，然后覆盖默认配置的值
+spring:
+  freemarker:
+    templateLoaderPath: classpath:/views/
