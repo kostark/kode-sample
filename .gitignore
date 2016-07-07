@@ -3,6 +3,7 @@
 out
 build
 target
+classes
 
 # gradle related files and folders
 .gradle
