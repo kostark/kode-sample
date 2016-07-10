@@ -38,6 +38,9 @@ allprojects {
     //扩展属性，通常用于多子项目时各子项目中属性/版本控制，引用该地方属性的字符不能用 <单引号> 引入这里的变量
     ext {
         jdkVersion = '1.8'
+
+        springBootVersion = '1.4.0.M3'
+
         springVersion = '4.3.1.RELEASE'
         springSecurityVersion = '4.0.4.RELEASE'
         hibernateValidation = '5.2.2.Final'
@@ -53,7 +56,6 @@ allprojects {
         mysqlConnector = '5.1.31'
         eclipseLinkVersion = '2.6.2'
         atomikosVersion = '4.0.1'
-        springBootVersion = '1.4.0.M3'
     }
 
     //全局仓库定义
