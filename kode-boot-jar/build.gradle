@@ -1,5 +1,20 @@
+//当前项目内的依赖
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter-freemarker:${springBootVersion}"
 }
 
+//定义 env 变量，用来实现 profile。默认为开发模式。
+def env = System.getProperty("env") ?: "dev"
+
+//定义输出 label
+def debugInfoLabel(msg) {
+    println ""
+    println "=================================================="
+    println "| ${msg}"
+    println "=================================================="
+    println ""
+}
+
+//根据不同的 env 的值，采用不同的配置
+apply from: "profile-${env}.gradle"

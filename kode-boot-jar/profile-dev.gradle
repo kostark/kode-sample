@@ -1,0 +1,4 @@
+//输出当前使用的配置文件信息
+debugInfoLabel "apply from profile-dev.gradle"
+
+
