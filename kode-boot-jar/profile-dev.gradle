@@ -1,0 +1,17 @@
+//输出当前使用的配置文件信息
+debugInfoLabel "apply from profile-dev.gradle"
+
+//当前项目内的依赖
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-freemarker:${springBootVersion}"
+}
+
+//导出 jar 时的配置
+jar {
+    //设置输出的名字，区分版本
+    baseName = "${baseName}-dev"
+
+    //也可以在版本上添加
+    //version = "dev-${version}"
+}

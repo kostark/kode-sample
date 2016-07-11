@@ -1,0 +1,17 @@
+//输出当前使用的配置文件信息
+debugInfoLabel "apply from profile-internal.gradle"
+
+//当前项目内的依赖
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-freemarker:${springBootVersion}"
+}
+
+//导出 jar 时的配置
+jar {
+    //输出多 sourceSet 中的输出结果
+    from sourceSets.main.output
+    from sourceSets.internal.output
+
+    version = "internal-${version}"
+}
