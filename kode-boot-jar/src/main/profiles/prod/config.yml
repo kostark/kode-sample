@@ -1,0 +1,4 @@
+jdbc:
+  url: http://223.37.126.231:3306
+  user: root
+  password: root

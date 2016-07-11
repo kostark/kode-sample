@@ -30,15 +30,13 @@ buildscript {
 //所有项目配置
 allprojects {
     group 'kode'
-    version '1.0'
+    version '1.0.0'
 
     //所有项目共同引入的插件
     apply plugin: 'idea'
 
     //扩展属性，通常用于多子项目时各子项目中属性/版本控制，引用该地方属性的字符不能用 <单引号> 引入这里的变量
     ext {
-        jdkVersion = '1.8'
-
         springBootVersion = '1.4.0.M3'
 
         springVersion = '4.3.1.RELEASE'
@@ -89,9 +87,9 @@ subprojects {
     apply plugin: 'spring-boot'
 
     //apply plugin: 'java' 之后才有属性 - 代码源兼容版本
-    sourceCompatibility = jdkVersion
+    sourceCompatibility = JavaVersion.VERSION_1_8
     //apply plugin: 'java' 之后才有属性 - 目标兼容版本
-    targetCompatibility = jdkVersion
+    targetCompatibility = JavaVersion.VERSION_1_8
 
     //所有项目都需要导入的库
     dependencies {
@@ -107,7 +105,8 @@ subprojects {
 //idea 插件配置
 idea {
     project {
-        jdkName = jdkVersion
-        languageLevel = jdkVersion
+        //使用 gradle 内枚举常量
+        jdkName = JavaVersion.VERSION_1_8
+        languageLevel = JavaVersion.VERSION_1_8
     }
 }

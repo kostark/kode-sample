@@ -6,4 +6,6 @@ test: I'm test value from application.properties.
 # 在配置文件中的读取，从自动装配的库中查找默认配置，然后覆盖默认配置的值
 spring:
   freemarker:
-    templateLoaderPath: classpath:/views/
+  # 设置模版加载路径
+  templateLoaderPath: classpath:/views/
+#    templateLoaderPath: webapp/views/
