@@ -1,8 +1,23 @@
 //输出当前使用的配置文件信息
 debugInfoLabel "apply from profile-prod.gradle"
 
+//声明使用 war 插件
+apply plugin: 'war'
+
+//war 导出配置
+war {
+    //设置输出的名字，区分版本
+    baseName = "${baseName}-prod"
+}
+
+configurations {
+    providedRuntime
+}
+
 //当前项目内的依赖，生产发布情况下，需要打包为 war 包，而不是 jar 包
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter-freemarker:${springBootVersion}"
+
+    providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
 }
