@@ -1,6 +1,6 @@
 //定义 env 变量，用来实现 profile。默认为开发模式。
 def env = System.getProperty("env") ?: "dev"
-def mod = System.getProperty("mod") ?: "internal"
+def mod = System.getProperty("mod") ?: ""
 
 //定义输出 label
 def debugInfoLabel(msg) {
@@ -13,7 +13,7 @@ def debugInfoLabel(msg) {
 
 sourceSets {
     main {
-
+        
         //需要区分配置的放到 profiles 下对应的文件夹内
         resources {
             srcDirs = ["src/main/resources", "src/main/profiles/${env}", "webapp"]
