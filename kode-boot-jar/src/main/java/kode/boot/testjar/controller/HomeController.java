@@ -27,4 +27,10 @@ public class HomeController {
 		model.addAttribute("message", "Hello world! " + desc + " | test = " + test + " | devName = ");
 		return "index";
 	}
+
+	@RequestMapping("/test")
+	String test(Model model) {
+		model.addAttribute("message", "Hello world! ============== test sample ||| " + desc + " | test = " + test + " | devName = ");
+		return "test";
+	}
 }

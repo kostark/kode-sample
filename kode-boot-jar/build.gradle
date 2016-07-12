@@ -1,5 +1,6 @@
 //定义 env 变量，用来实现 profile。默认为开发模式。
 def env = System.getProperty("env") ?: "dev"
+def mod = System.getProperty("mod") ?: "internal"
 
 //定义输出 label
 def debugInfoLabel(msg) {
@@ -15,7 +16,7 @@ sourceSets {
 
         //需要区分配置的放到 profiles 下对应的文件夹内
         resources {
-            srcDirs = ["src/main/resources", "src/main/profiles/${env}"]
+            srcDirs = ["src/main/resources", "src/main/profiles/${env}", "webapp"]
         }
     }
 
@@ -26,6 +27,7 @@ sourceSets {
         }
 
         //添加之后能够做到 sourceSets 之间的相互依赖了。
+        //main 模块不能引用 internal 模块。
         compileClasspath += sourceSets.main.output
     }
 }
@@ -36,5 +38,14 @@ task outputDirs << {
     }
 }
 
-//根据不同的 env 的值，采用不同的配置
-apply from: "gradle/profile-${env}.gradle"
+//选择需要使用的 gradle 文件
+if (mod == "internal") {
+    //如果是内部版本，使用主版本代码 + 内部版本代码 + 对应的配置文件
+    apply from: "profile-internal.gradle"
+
+} else {
+    //如果是外部版本，使用主版本代码 + 对应的配置文件
+    //根据不同的 env 的值，采用不同的配置
+    apply from: "profile-${env}.gradle"
+}
+
