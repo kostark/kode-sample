@@ -1,7 +1,7 @@
 <#ftl>
 <html>
 <head>
-	<title>Home</title>
+    <title>Home</title>
 </head>
 <body>
 Message: ${message}

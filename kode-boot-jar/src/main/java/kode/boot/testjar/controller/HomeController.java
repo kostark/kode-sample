@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
+	//从配置文件中读取配置
 	@Value("${name}")
 	private String name;
 
@@ -24,13 +25,16 @@ public class HomeController {
 
 	@RequestMapping("/")
 	String home(Model model) {
-		model.addAttribute("message", "Hello world! " + desc + " | test = " + test + " | devName = ");
+		model.addAttribute("message", "Hello world! <br/>"
+				+ "desc: " + desc + "<br/>" +
+				"test: " + test);
 		return "index";
 	}
 
-	@RequestMapping("/test")
+	@RequestMapping("test")
 	String test(Model model) {
 		model.addAttribute("message", "Hello world! ============== test sample ||| " + desc + " | test = " + test + " | devName = ");
 		return "test";
 	}
+
 }

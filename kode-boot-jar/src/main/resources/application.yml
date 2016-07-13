@@ -13,9 +13,6 @@ spring:
     # 设置模版加载路径
     templateLoaderPath:
       - classpath:/views/
-  datasource:
-    tomcat:
-      connection-properties:
       # 这样的配置只能在使用 gradle 内的插件时才能生效。
       # 很好理解，因为这部分资源文件只有在经过 gradle 处理之后才会被复制到 classpath下，才能被解析到。
       # 如果直接运行 main 方法入口是不能解析该文件夹内的页面的。
