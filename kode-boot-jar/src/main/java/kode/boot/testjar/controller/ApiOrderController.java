@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  * @since 2016/7/7
  */
 @Controller
-@RequestMapping("rest")
+@RequestMapping("api")
 public class ApiOrderController {
 
 	@ResponseBody
