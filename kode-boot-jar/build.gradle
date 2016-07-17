@@ -13,7 +13,7 @@ def debugInfoLabel(msg) {
 
 sourceSets {
     main {
-        
+
         //需要区分配置的放到 profiles 下对应的文件夹内
         resources {
             srcDirs = ["src/main/resources", "src/main/profiles/${env}", "webapp"]
@@ -36,6 +36,14 @@ task outputDirs << {
     sourceSets.main.resources.srcDirs.each {
         f -> println(f)
     }
+}
+
+//当前项目内的依赖
+dependencies {
+    compile("org.hibernate:hibernate-validator:${hibernateValidation}") {
+        exclude module: 'org.jboss.logging:jboss-logging'
+    }
+    compile "org.hibernate:hibernate-validator-annotation-processor:${hibernateValidation}"
 }
 
 //选择需要使用的 gradle 文件

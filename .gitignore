@@ -5,6 +5,9 @@ build
 target
 classes
 
+# nodejs
+node_modules
+
 # gradle related files and folders
 .gradle
 gradle
