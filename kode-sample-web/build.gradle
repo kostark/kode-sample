@@ -1,15 +1,17 @@
-group 'kode'
-version '1.0-SNAPSHOT'
-
-apply plugin: 'java'
 apply plugin: 'war'
-
-sourceCompatibility = 1.5
 
 repositories {
     mavenCentral()
 }
 
+task copySrc(type: Copy) {
+    
+}
+
+war {
+    from "../kode-static-resource/src/main/webapp"
+}
+
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+//    compile project(":kode-static-resource")
 }

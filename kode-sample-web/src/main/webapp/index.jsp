@@ -7,10 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
+<head>
     <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+    <script src="http://localhost:8080/script/jquery/jquery-1.2.4.min.js"></script>
+</head>
+<body>
+$END$
+</body>
 </html>
