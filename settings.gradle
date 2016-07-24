@@ -3,5 +3,4 @@ include 'kode-sample-web'
 include 'kode-sample-sdk'
 include 'kode-boot-jar'
 include 'kode-static-web'
-include 'kode-static-resource'
 

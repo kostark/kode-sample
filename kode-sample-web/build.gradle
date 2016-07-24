@@ -1,17 +1,25 @@
 apply plugin: 'war'
 
-repositories {
-    mavenCentral()
-}
-
-task copySrc(type: Copy) {
-    
-}
-
+//war 打包时的配置，把静态资源一起打包进 war 包
 war {
-    from "../kode-static-resource/src/main/webapp"
+    from resourcePath.split(',')
+}
+
+//配置 clean 任务，同时清理 exploded 目录
+clean {
+    delete explodedPath
+}
+
+//寻找增量复制的实现。
+//为了开发测试，从静态资源文件项目把静态资源文件复制到 servlet 容器目录中
+task copyAsset(type: Copy, dependsOn: [clean, build]) {
+    from resourcePath.split(',')
+    into explodedPath
+    exclude { details ->
+        details.file.name.endsWith('.html') &&
+                details.file.text.contains('staging')
+    }
 }
 
 dependencies {
-//    compile project(":kode-static-resource")
 }
