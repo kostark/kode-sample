@@ -1,4 +1,5 @@
 jdbc:
-  url: http://223.37.126.231:3306
+  driver: com.mysql.jdbc.Driver
+  url: jdbc:mysql://227.10.10.231:3306/test_mybatis?characterEncoding=utf8&useSSL=false
   user: root
   password: root

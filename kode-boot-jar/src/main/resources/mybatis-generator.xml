@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<!-- 配置生成器 -->
+<generatorConfiguration>
+
+    <classPathEntry
+            location="F:\GradleRepo\caches\modules-2\files-2.1\mysql\mysql-connector-java\5.1.39\4617fe8dc8f1969ec450984b0b9203bc8b7c8ad5\mysql-connector-java-5.1.39.jar"/>
+
+    <context id="context" targetRuntime="MyBatis3">
+
+        <property name="javaFileEncoding" value="utf-8"/>
+
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- !!!! Database Configurations !!!! -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test_mybatis"
+                        userId="root" password="root"/>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- !!!! Model Configurations !!!! -->
+        <javaModelGenerator targetPackage="kode.boot.testjar.domain" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+            <property name="rootClass" value="kode.boot.testjar.domain.BaseObject"/>
+        </javaModelGenerator>
+
+        <!-- !!!! Mapper XML Configurations !!!! -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- !!!! Mapper Interface Configurations !!!! -->
+        <javaClientGenerator targetPackage="kode.boot.testjar.mapper" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED"
+                             type="XMLMAPPER">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!-- !!!! Table Configurations !!!! -->
+        <table tableName="user" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnOverride column="createTime" property="createTime"/>
+        </table>
+
+        <table tableName="company" enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <columnRenamingRule searchString="test" replaceString=""/>
+            <columnOverride column="createTime" property="createTime"/>
+
+            <columnOverride column="createTime">
+                <property name="property" value="createTime"/>
+            </columnOverride>
+        </table>
+
+    </context>
+</generatorConfiguration>

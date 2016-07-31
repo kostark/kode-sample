@@ -1,5 +1,5 @@
 jdbc:
   driver: com.mysql.jdbc.Driver
   url: jdbc:mysql://localhost:3306/test_mybatis
-  user: root
+  username: root
   password: root

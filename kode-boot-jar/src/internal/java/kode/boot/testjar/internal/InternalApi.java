@@ -1,6 +1,6 @@
 package kode.boot.testjar.internal;
 
-import kode.boot.testjar.config.DatabaseConfig;
+import kode.boot.testjar.config.DataConfig;
 
 /**
  * @author Stark
@@ -9,5 +9,5 @@ import kode.boot.testjar.config.DatabaseConfig;
 public class InternalApi {
 	public static final String TAG = "internal";
 
-	DatabaseConfig dc;
+	DataConfig dc;
 }

@@ -2,56 +2,64 @@ package kode.boot.testjar.domain;
 
 import java.util.Date;
 
-/**
- * @author Stark
- * @since 1.0, 2016/7/14
- */
 public class User extends BaseObject {
+    private Integer id;
 
-	private long id;
-	private String name;
-	private String username;
-	private Date birthday;
+    private String name;
 
-	public long getId() {
-		return id;
-	}
+    private Integer age;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    private String phone;
 
-	public String getName() {
-		return name;
-	}
+    private Date createTime;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    private Integer companyId;
 
-	public String getUsername() {
-		return username;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Date getBirthday() {
-		return birthday;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
 
-	@Override
-	public String toString() {
-		return "User{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", username='" + username + '\'' +
-				", birthday=" + birthday +
-				'}';
-	}
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
 }
