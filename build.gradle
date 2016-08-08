@@ -18,8 +18,8 @@ buildscript {
 
     repositories {
         jcenter()
-//        maven { url "http://repo.spring.io/snapshot" }
-//        maven { url "http://repo.spring.io/milestone" }
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
     }
 
     dependencies {
@@ -69,8 +69,8 @@ allprojects {
 
         //在使用 spring-boot 后，由于很多依赖来源于 spring 的仓库，所以必须添加。
         //如果没添加将出现 detachedConfiguration1 关键字的异常
-//        maven { url "http://repo.spring.io/snapshot" }
-//        maven { url "http://repo.spring.io/milestone" }
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
 
         //http://jcenter.bintray.com/ 上的仓库，比较全，相对速度比中央仓库快
         jcenter()

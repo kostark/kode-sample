@@ -14,11 +14,11 @@ import javax.sql.DataSource;
 public class UserServiceImpl implements IUserService {
 
 
-    @Autowired
-    UserMapper userMapper;
+	@Autowired
+	UserMapper userMapper;
 
-    @Override
-    public int countAllUser() {
-        return userMapper.countAllUser();
-    }
+	@Override
+	public int countAllUser() {
+		return userMapper.countAllUser();
+	}
 }
