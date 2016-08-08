@@ -24,31 +24,26 @@ import java.util.Arrays;
 @Import({ServletConfig.class, DataConfig.class})
 public class Application extends SpringBootServletInitializer implements CommandLineRunner {
 
-//	@Autowired
-//	DataSource dataSource;
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return super.configure(builder);
+    }
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return super.configure(builder);
-	}
+    public static void main(String[] args) {
 
-	public static void main(String[] args) {
+        ApplicationContext app = new SpringApplicationBuilder(Application.class)
+                .bannerMode(Banner.Mode.OFF)
+                .build()
+                .run(args);
 
-		ApplicationContext app = new SpringApplicationBuilder(Application.class)
-				.bannerMode(Banner.Mode.OFF)
-				.build()
-				.run(args);
+        String[] beanNames = app.getBeanDefinitionNames();
+        Arrays.sort(beanNames);
+        for (String bean : beanNames) {
+            System.out.println(bean);
+        }
+    }
 
-		String[] beanNames = app.getBeanDefinitionNames();
-		Arrays.sort(beanNames);
-		for (String bean : beanNames) {
-			System.out.println(bean);
-		}
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
-
-
-	}
+    @Override
+    public void run(String... args) throws Exception {
+    }
 }
