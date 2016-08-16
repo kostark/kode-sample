@@ -1,9 +1,14 @@
 package kode.boot.testjar.controller;
 
+import kode.boot.testjar.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.sql.DataSource;
+import java.util.Date;
 
 /**
  * @version 1.0
@@ -12,34 +17,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-	//从配置文件中读取配置
-	@Value("${name}")
-	private String name;
+    //从配置文件中读取配置
+    @Value("${name}")
+    private String name;
 
-	@Value("${desc}")
-	private String desc;
+    @Value("${desc}")
+    private String desc;
 
-	@Value("${test:defaultTestValue}")
-	private String test;
+    @Value("${test:defaultTestValue}")
+    private String test;
 
-/*	@Autowired
-	IUserService userService;
+    @Autowired
+    IUserService userService;
 
-	@Autowired
-	DataSource dataSource;*/
+    @Autowired
+    DataSource dataSource;
 
-	@RequestMapping("/")
-	String home(Model model) {
-		model.addAttribute("message", "Hello world! <br/>"
-				+ "desc: " + desc + "<br/>" +
-				"test: " + test);
-//		model.addAttribute("userCount", userService.countAllUser());
-		return "index";
-	}
+    @RequestMapping("/")
+    String home(Model model) {
+        model.addAttribute("message", "Hello world! <br/>"
+                + "desc: " + desc + "<br/>" +
+                "test: " + test);
+//        model.addAttribute("userCount", userService.countAllUser());
+        model.addAttribute("date", new Date());
+        return "index";
+    }
 
-	@RequestMapping("test")
-	String test(Model model) {
-		model.addAttribute("message", "Hello world! ============== test sample ||| " + desc + " | test = " + test + " | devName = ");
-		return "test";
-	}
+    @RequestMapping("test")
+    String test(Model model) {
+        model.addAttribute("message", "Hello world! ============== test sample ||| " + desc + " | test = " + test + " | devName = ");
+        return "test";
+    }
 }

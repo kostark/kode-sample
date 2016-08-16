@@ -10,16 +10,16 @@ server:
 # 在配置文件中的读取，从自动装配的库中查找默认配置，然后覆盖默认配置的值
 spring:
   freemarker:
-    # 设置模版加载路径
-    templateLoaderPath:
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: request
+    template-loader-path:
       - classpath:/views/
-      # 这样的配置只能在使用 gradle 内的插件时才能生效。
-      # 很好理解，因为这部分资源文件只有在经过 gradle 处理之后才会被复制到 classpath下，才能被解析到。
-      # 如果直接运行 main 方法入口是不能解析该文件夹内的页面的。
-      # - webapp/views/
+    settings:
+      datetime_format: yyyy/MM/dd HH:mm:ss
 
   datasource:
-    driverClassName: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test_mybatis
     username: root
     password: root
