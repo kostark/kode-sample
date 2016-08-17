@@ -1,8 +1,10 @@
 package kode.boot.testjar.controller;
 
-import kode.boot.testjar.service.IUserService;
+import kode.boot.testjar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,11 +29,15 @@ public class HomeController {
     @Value("${test:defaultTestValue}")
     private String test;
 
-    @Autowired
-    IUserService userService;
+    private UserService userService;
+
+    private DataSource dataSource;
 
     @Autowired
-    DataSource dataSource;
+    public HomeController(UserService userService, DataSource dataSource) {
+        this.userService = userService;
+        this.dataSource = dataSource;
+    }
 
     @RequestMapping("/")
     String home(Model model) {
@@ -46,6 +52,22 @@ public class HomeController {
     @RequestMapping("test")
     String test(Model model) {
         model.addAttribute("message", "Hello world! ============== test sample ||| " + desc + " | test = " + test + " | devName = ");
+        return "test";
+    }
+
+    @RequestMapping("hello")
+    String hello() {
+        return "test";
+    }
+
+    @RequestMapping("login")
+    String login() {
+        return "login";
+    }
+
+    @RequestMapping("create")
+    @Secured("")
+    String create() {
         return "test";
     }
 }

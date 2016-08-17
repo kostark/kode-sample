@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Stark
  * @since 1.0, 2016/7/28
  */
-public class IUserServiceTest extends ApplicationTest {
+public class UserServiceTest extends ApplicationTest {
 
 	@Autowired
-	IUserService userService;
+    UserService userService;
 
 	@Test
 	public void countAllUser() throws Exception {
