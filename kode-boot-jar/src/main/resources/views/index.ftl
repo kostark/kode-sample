@@ -2,6 +2,9 @@
 <html>
 <head>
     <title>Home</title>
+    <link rel='stylesheet' href='<@spring.url "/webjars/bootstrap/3.1.0/css/bootstrap.min.css"/>'>
+    <link rel='stylesheet' href='<@spring.url "/webjars/jquery/1.12.4/jquery.min.css"/>'>
+    <script src="webjars/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
 Message: ${message}
