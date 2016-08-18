@@ -14,6 +14,8 @@ server:
 
 # 在配置文件中的读取，从自动装配的库中查找默认配置，然后覆盖默认配置的值
 spring:
+  mvc:
+    locale: zh
   freemarker:
     expose-request-attributes: true
     expose-session-attributes: true
@@ -24,13 +26,14 @@ spring:
       datetime_format: yyyy/MM/dd HH:mm:ss
       url_escaping_charset: UTF-8
       auto_import: /spring.ftl as spring, _core/widget.ftl as widget
-
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test_mybatis
     username: root
     password: root
     type: com.alibaba.druid.pool.DruidDataSource
+  messages:
+    basename: i18n/message
 
 #spring security 相关配置
 security:
