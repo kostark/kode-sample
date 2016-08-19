@@ -2,7 +2,7 @@ package kode.boot.testjar.domain;
 
 import java.util.Date;
 
-public class SecUser extends BaseObject {
+public class AppUser extends BaseObject {
     private Long id;
 
     private String username;

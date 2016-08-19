@@ -1,6 +1,6 @@
 package kode.boot.testjar.domain;
 
-public class SecUserRole extends BaseObject {
+public class AppUserRole extends BaseObject {
     private Long id;
 
     private Long userId;

@@ -43,19 +43,19 @@
 		</javaClientGenerator>
 
 		<!-- !!!! Table Configurations !!!! -->
-		<table tableName="sec_user" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+		<table tableName="app_user" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
 			<generatedKey column="id" sqlStatement="MySql" identity="true"/>
 		</table>
 
-		<table tableName="sec_user_role" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+		<table tableName="app_user_role" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
 			<generatedKey column="id" sqlStatement="MySql" identity="true"/>
 		</table>
 
-		<table tableName="sec_role" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+		<table tableName="app_role" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
 			<generatedKey column="id" sqlStatement="MySql" identity="true"/>
 		</table>
 
-		<table tableName="sec_role_auth" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+		<table tableName="app_role_auth" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
 			<generatedKey column="id" sqlStatement="MySql" identity="true"/>
 		</table>
 

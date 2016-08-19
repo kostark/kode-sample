@@ -1,6 +1,6 @@
 package kode.boot.testjar.domain;
 
-public class SecRoleAuth extends BaseObject {
+public class AppRoleAuth extends BaseObject {
     private Long id;
 
     private Long roleId;

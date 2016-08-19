@@ -1,69 +1,69 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="kode.boot.testjar.mapper.SecUserRoleMapper" >
-  <resultMap id="BaseResultMap" type="kode.boot.testjar.domain.SecUserRole" >
+<mapper namespace="kode.boot.testjar.mapper.AppRoleAuthMapper" >
+  <resultMap id="BaseResultMap" type="kode.boot.testjar.domain.AppRoleAuth" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="auth_code" property="authCode" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, role_id
+    id, role_id, auth_code
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from sec_user_role
+    from app_role_auth
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from sec_user_role
+    delete from app_role_auth
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="kode.boot.testjar.domain.SecUserRole" >
+  <insert id="insert" parameterType="kode.boot.testjar.domain.AppRoleAuth" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into sec_user_role (user_id, role_id)
-    values (#{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
+    insert into app_role_auth (role_id, auth_code)
+    values (#{roleId,jdbcType=BIGINT}, #{authCode,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="kode.boot.testjar.domain.SecUserRole" >
+  <insert id="insertSelective" parameterType="kode.boot.testjar.domain.AppRoleAuth" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into sec_user_role
+    insert into app_role_auth
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        user_id,
-      </if>
       <if test="roleId != null" >
         role_id,
       </if>
+      <if test="authCode != null" >
+        auth_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        #{userId,jdbcType=BIGINT},
-      </if>
       <if test="roleId != null" >
         #{roleId,jdbcType=BIGINT},
       </if>
+      <if test="authCode != null" >
+        #{authCode,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="kode.boot.testjar.domain.SecUserRole" >
-    update sec_user_role
+  <update id="updateByPrimaryKeySelective" parameterType="kode.boot.testjar.domain.AppRoleAuth" >
+    update app_role_auth
     <set >
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=BIGINT},
-      </if>
       <if test="roleId != null" >
         role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="authCode != null" >
+        auth_code = #{authCode,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="kode.boot.testjar.domain.SecUserRole" >
-    update sec_user_role
-    set user_id = #{userId,jdbcType=BIGINT},
-      role_id = #{roleId,jdbcType=BIGINT}
+  <update id="updateByPrimaryKey" parameterType="kode.boot.testjar.domain.AppRoleAuth" >
+    update app_role_auth
+    set role_id = #{roleId,jdbcType=BIGINT},
+      auth_code = #{authCode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

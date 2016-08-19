@@ -2,7 +2,7 @@ package kode.boot.testjar.domain;
 
 import java.util.Date;
 
-public class SecRole extends BaseObject {
+public class AppRole extends BaseObject {
     private Long id;
 
     private String name;
