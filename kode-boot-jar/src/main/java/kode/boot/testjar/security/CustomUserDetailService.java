@@ -1,6 +1,8 @@
-package kode.boot.testjar.service;
+package kode.boot.testjar.security;
 
+import kode.boot.testjar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,13 +15,13 @@ import org.springframework.stereotype.Component;
  * @since 1.0
  */
 @Component
-public class SecurityUserService implements UserDetailsService {
+public class CustomUserDetailService implements UserDetailsService {
 
     @Autowired
     UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        return new User(username, "123456", true, true, true, true, null);
     }
 }

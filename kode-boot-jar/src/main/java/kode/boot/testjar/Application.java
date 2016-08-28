@@ -24,9 +24,6 @@ import java.util.Arrays;
 @Import({ServletConfig.class, DataConfig.class})
 public class Application extends SpringBootServletInitializer implements CommandLineRunner {
 
-//	@Autowired
-//	DataSource dataSource;
-
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return super.configure(builder);
@@ -48,7 +45,6 @@ public class Application extends SpringBootServletInitializer implements Command
 
     @Override
     public void run(String... args) throws Exception {
-
 
     }
 }

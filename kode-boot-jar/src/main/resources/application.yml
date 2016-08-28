@@ -6,7 +6,12 @@ test: I'm test value from application.properties.
 
 # 服务器相关配置
 server:
-  port: 8000
+  port: 8443
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: KoStark_99
+    key-store-type: PKCS12
+    key-alias: tomcat
   session:
     timeout: 1800
   context-path: /
@@ -35,8 +40,5 @@ spring:
   messages:
     basename: i18n/message
 
-#spring security 相关配置
-security:
-  enable-csrf: false
 
 

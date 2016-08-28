@@ -13,8 +13,10 @@ User count: ${userCount!0}
 <br/>
 Date: ${date?datetime}
 
-<@spring.message "username"/>: <input type="text" placeholder="<@spring.url "username"/>">
-<@spring.message "password"/>: <input type="password" placeholder="<@spring.url "password"/>">
+<div>
+<@spring.message "web.label.username"/>: <input type="text" placeholder="<@spring.message "web.label.username"/>">
+<@spring.message "web.label.password"/>: <input type="password" placeholder="<@spring.message "web.label.password"/>">
+</div>
 
 <footer style="font-size: 16px; width: 100%; height: 200px; line-height: 200px; text-align: center;">
     Koweb.top

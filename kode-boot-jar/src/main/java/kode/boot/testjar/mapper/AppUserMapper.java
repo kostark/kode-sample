@@ -2,10 +2,8 @@ package kode.boot.testjar.mapper;
 
 import kode.boot.testjar.domain.AppUser;
 
-public interface AppUserMapper extends BaseMapper {
+public interface AppUserMapper extends BaseMapper<AppUser, Long> {
     int deleteByPrimaryKey(Long id);
-
-    int insert(AppUser record);
 
     int insertSelective(AppUser record);
 
@@ -14,4 +12,6 @@ public interface AppUserMapper extends BaseMapper {
     int updateByPrimaryKeySelective(AppUser record);
 
     int updateByPrimaryKey(AppUser record);
+
+    int countAllUser();
 }

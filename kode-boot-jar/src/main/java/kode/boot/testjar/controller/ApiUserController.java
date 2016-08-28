@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "api")
 public class ApiUserController {
 
-	@RequestMapping("/test/{user}")
-	@ResponseBody
-	public String getUser(@PathVariable String user) {
-		return "username:" + user + ". welcome!";
-	}
+    @RequestMapping("/test/{user}")
+    @ResponseBody
+    public String getUser(@PathVariable String user) {
+        return "username:" + user + ". welcome!";
+    }
 
 }
