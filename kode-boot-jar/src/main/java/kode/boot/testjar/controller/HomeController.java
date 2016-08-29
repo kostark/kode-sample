@@ -29,6 +29,7 @@ public class HomeController {
     @Value("${test:defaultTestValue}")
     private String test;
 
+    @Autowired
     private UserService userService;
 
     private DataSource dataSource;

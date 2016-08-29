@@ -40,7 +40,7 @@ allprojects {
         springBootVersion = '1.4.0.RELEASE'
 
         springVersion = '4.3.1.RELEASE'
-        springSecurityVersion = '4.0.4.RELEASE'
+        springSecurityVersion = '4.1.1.RELEASE'
         hibernateValidation = '5.2.2.Final'
         freemarkerVersion = '2.3.23'
         slf4jVersion = '1.7.21'
