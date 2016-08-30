@@ -23,32 +23,32 @@ import java.util.Arrays;
  */
 @EnableAutoConfiguration
 @SpringBootApplication
-@Import({ServletConfig.class, DataConfig.class, ServletConfig.class})
+@Import({ServletConfig.class, DataConfig.class})
 public class Application extends SpringBootServletInitializer implements CommandLineRunner {
 
-	private static final Logger logger = LoggerFactory.getLogger(Application.class);
+    private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return super.configure(builder);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return super.configure(builder);
+    }
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		ApplicationContext app = new SpringApplicationBuilder(Application.class)
-				.bannerMode(Banner.Mode.OFF)
-				.build()
-				.run(args);
+        ApplicationContext app = new SpringApplicationBuilder(Application.class)
+                .bannerMode(Banner.Mode.OFF)
+                .build()
+                .run(args);
 
-		String[] beanNames = app.getBeanDefinitionNames();
-		Arrays.sort(beanNames);
-		for (String bean : beanNames) {
-			logger.info(bean);
-		}
-	}
+        String[] beanNames = app.getBeanDefinitionNames();
+        Arrays.sort(beanNames);
+        for (String bean : beanNames) {
+            logger.info(bean);
+        }
+    }
 
-	@Override
-	public void run(String... args) throws Exception {
+    @Override
+    public void run(String... args) throws Exception {
 
-	}
+    }
 }

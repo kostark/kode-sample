@@ -11,5 +11,7 @@ import java.util.List;
  * @since 2016/8/30
  */
 public interface AppRoleService {
-	List<AppAuth> getAuthByRoleId(long roleId);
+    List<AppAuth> getAuthByRoleId(long roleId);
+
+
 }

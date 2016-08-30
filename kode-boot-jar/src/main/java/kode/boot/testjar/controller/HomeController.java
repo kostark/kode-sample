@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.security.PermitAll;
-import javax.sql.DataSource;
 import java.util.Date;
 
 /**
@@ -29,46 +28,43 @@ public class HomeController {
 	@Value("${test:defaultTestValue}")
 	private String test;
 
+	@Autowired
 	private AppUserService appUserService;
 
-	private DataSource dataSource;
+//	@Autowired
+//	public HomeController(AppUserService userService) {
+//		this.appUserService = userService;
+//	}
 
-	@Autowired
-	public HomeController(AppUserService appUserService, DataSource dataSource) {
-		this.appUserService = appUserService;
-		this.dataSource = dataSource;
+	@RequestMapping("/")
+	String home(Model model) {
+		model.addAttribute("message", "Hello world! <br/>"
+				+ "desc: " + desc + "<br/>" +
+				"test: " + test);
+		model.addAttribute("userCount", appUserService.countAllUser());
+		model.addAttribute("date", new Date());
+		model.addAttribute("userStatus", 3);
+
+		return "index";
 	}
 
-    @RequestMapping("/")
-    String home(Model model) {
-        model.addAttribute("message", "Hello world! <br/>"
-                + "desc: " + desc + "<br/>" +
-                "test: " + test);
-//        model.addAttribute("userCount", userService.countAllUser());
-        model.addAttribute("date", new Date());
+	@PermitAll
+	@RequestMapping("test")
+	String test(Model model) {
+		model.addAttribute("message", "Hello world! ============== test sample ||| " + desc + " | test = " + test + " | devName = ");
+		return "test";
+	}
 
-        model.addAttribute("userStatus", userService.getUserStatus(3));
+	@RequestMapping("access_denied")
+	String accessDenied(Model model) {
+		model.addAttribute("message", "您无此权限，请求被拒绝。");
+		return "test";
+	}
 
-        return "index";
-    }
-
-    @PermitAll
-    @RequestMapping("test")
-    String test(Model model) {
-        model.addAttribute("message", "Hello world! ============== test sample ||| " + desc + " | test = " + test + " | devName = ");
-        return "test";
-    }
-
-    @RequestMapping("access_denied")
-    String accessDenied(Model model) {
-        model.addAttribute("message", "您无此权限，请求被拒绝。");
-        return "test";
-    }
-
-    @RequestMapping("hello")
-    String hello() {
-        return "test";
-    }
+	@RequestMapping("hello")
+	String hello() {
+		return "test";
+	}
 
 	@RequestMapping("login")
 	String login() {
@@ -76,7 +72,6 @@ public class HomeController {
 	}
 
 	@RequestMapping("create")
-	@Secured("")
 	String create() {
 		return "test";
 	}
