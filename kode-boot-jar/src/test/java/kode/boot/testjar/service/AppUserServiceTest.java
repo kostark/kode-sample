@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Stark
  * @since 1.0, 2016/7/28
  */
-public class UserServiceTest extends ApplicationTest {
+public class AppUserServiceTest extends ApplicationTest {
 
 	@Autowired
-    UserService userService;
+	AppUserService appUserService;
 
 	@Test
 	public void countAllUser() throws Exception {
-		int count = userService.countAllUser();
+		int count = appUserService.countAllUser();
 		Assert.assertEquals(count, 4);
 	}
 

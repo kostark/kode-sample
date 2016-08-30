@@ -10,15 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 /**
  * Created by Stark on 2016/8/16.
- * <p>
  * <pre>
- *
  *     <http auto-config="true">
- *
  *     </http>
- *
- *
- *
  * </pre>
  *
  * @author Stark
@@ -28,72 +22,75 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        // 开启调试信息
-        web.debug(true);
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		// 开启调试信息
+		// web.debug(true);
 
-        // 过滤对应匹配路径下的请求，优于 HttpSecurity 中用拦截路径来过滤
-        web.ignoring().antMatchers("/webjars/**", "/resources/**", "/static/**");
-    }
+		// 过滤对应匹配路径下的请求，优于 HttpSecurity 中用拦截路径来过滤
+		web.ignoring().antMatchers("/webjars/**",
+				"/resources/**",
+				"/static/**",
+				"/**/*.ico");
+	}
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        // 该方法用来配置 HttpSecurity，不要调用 super.configure(http)，否则有可能覆盖自定义配置
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		// 该方法用来配置 HttpSecurity，不要调用 super.configure(http)，否则有可能覆盖自定义配置
 
-        // 首行引入对应过滤器，缩进进行配置
-        // @formatter:off
-        http
-                //关闭 csrf（跨站点请求伪造保护） 支持
-                .csrf()
-                    .disable()
+		// 首行引入对应过滤器，缩进进行配置
+		// @formatter:off
+		http
+				//关闭 csrf（跨站点请求伪造保护） 支持
+				.csrf()
+				.disable()
 
                 /*
-                .antMatcher("")
+				.antMatcher("")
                 .requestMatchers()
                     .antMatchers("")
                 .and()
                 */
 
-                // 请求授权
-                .authorizeRequests()
-                    .antMatchers("/", "/home").permitAll()
-                    .anyRequest().authenticated()
+				// 请求授权
+				.authorizeRequests()
+				.antMatchers("/", "/home").permitAll()
+				.anyRequest().authenticated()
 
-                // form 登陆
-                .and().formLogin()
-                    .loginPage("/login").permitAll()
+				// form 登陆
+				.and().formLogin()
+				.loginPage("/login").permitAll()
 
-                // 退出过滤器
-                .and().logout()
-                    .permitAll()
+				// 退出过滤器
+				.and().logout()
+				.permitAll()
 
-                // 开启记住登陆
-                .and().rememberMe()
+				// 开启记住登陆
+				.and().rememberMe()
 
-                // 要求特定通道
-                .and().requiresChannel()
-                    .anyRequest().requiresSecure()
+				// 要求特定通道
+				.and().requiresChannel()
+				.anyRequest().requiresSecure()
 
-                // 配置端口隐射
-                .and().portMapper()
-                    .http(8000).mapsTo(8443)
-                    .http(80).mapsTo(443)
+				// 配置端口隐射
+				.and().portMapper()
+				.http(8000).mapsTo(8443)
+				.http(80).mapsTo(443)
 
-                // session 管理
-                .and().sessionManagement()
-                    .maximumSessions(1);
+				// session 管理
+				.and().sessionManagement()
+				.maximumSessions(1);
 
-        // @formatter:on
-    }
+		// @formatter:on
+	}
 
-    @Autowired
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //@formatter:off
-        auth
-                .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
-        //@formatter:on
-    }
+	@Autowired
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		//@formatter:off
+		auth
+				.inMemoryAuthentication()
+				.withUser("user").password("password").roles("USER");
+		//@formatter:on
+	}
 }
