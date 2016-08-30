@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 /**
  * 安全信息配置
+ * Created by Stark on 2016/8/16.
  *
  * @author Stark
  * @since 1.0
@@ -21,28 +22,31 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        // 开启调试信息
-        web.debug(true);
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		// 开启调试信息
+		// web.debug(true);
 
-        // 过滤对应匹配路径下的请求，优于 HttpSecurity 中用拦截路径来过滤
-        web.ignoring().antMatchers("/webjars/**", "/resources/**", "/static/**");
-    }
+		// 过滤对应匹配路径下的请求，优于 HttpSecurity 中用拦截路径来过滤
+		web.ignoring().antMatchers("/webjars/**",
+				"/resources/**",
+				"/static/**",
+				"/**/*.ico");
+	}
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        // 该方法用来配置 HttpSecurity，不要调用 super.configure(http)，否则有可能覆盖自定义配置
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		// 该方法用来配置 HttpSecurity，不要调用 super.configure(http)，否则有可能覆盖自定义配置
 
-        // 首行引入对应过滤器，缩进进行配置
-        // @formatter:off
-        http
-                //关闭 csrf（跨站点请求伪造保护） 支持
-                .csrf()
-                    .disable()
+		// 首行引入对应过滤器，缩进进行配置
+		// @formatter:off
+		http
+				//关闭 csrf（跨站点请求伪造保护） 支持
+				.csrf()
+				.disable()
 
                 /*
-                .antMatcher("")
+				.antMatcher("")
                 .requestMatchers()
                     .antMatchers("")
                 .and()

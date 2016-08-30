@@ -1,10 +1,9 @@
 package kode.boot.testjar.controller;
 
-import kode.boot.testjar.service.UserService;
+import kode.boot.testjar.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,26 +19,25 @@ import java.util.Date;
 @Controller
 public class HomeController {
 
-    //从配置文件中读取配置
-    @Value("${name}")
-    private String name;
+	//从配置文件中读取配置
+	@Value("${name}")
+	private String name;
 
-    @Value("${desc}")
-    private String desc;
+	@Value("${desc}")
+	private String desc;
 
-    @Value("${test:defaultTestValue}")
-    private String test;
+	@Value("${test:defaultTestValue}")
+	private String test;
 
-    @Autowired
-    private UserService userService;
+	private AppUserService appUserService;
 
-    private DataSource dataSource;
+	private DataSource dataSource;
 
-    @Autowired
-    public HomeController(UserService userService, DataSource dataSource) {
-        this.userService = userService;
-        this.dataSource = dataSource;
-    }
+	@Autowired
+	public HomeController(AppUserService appUserService, DataSource dataSource) {
+		this.appUserService = appUserService;
+		this.dataSource = dataSource;
+	}
 
     @RequestMapping("/")
     String home(Model model) {
@@ -72,14 +70,14 @@ public class HomeController {
         return "test";
     }
 
-    @RequestMapping("login")
-    String login() {
-        return "login";
-    }
+	@RequestMapping("login")
+	String login() {
+		return "login";
+	}
 
-    @RequestMapping("create")
-    @Secured("")
-    String create() {
-        return "test";
-    }
+	@RequestMapping("create")
+	@Secured("")
+	String create() {
+		return "test";
+	}
 }

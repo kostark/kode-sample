@@ -15,6 +15,7 @@ Date: ${date?datetime}
 <br/>
 UserStatus: ${userStatus!-1}
 
+
 <div>
 <@spring.message "web.label.username"/>: <input type="text" placeholder="<@spring.message "web.label.username"/>">
 <@spring.message "web.label.password"/>: <input type="password" placeholder="<@spring.message "web.label.password"/>">

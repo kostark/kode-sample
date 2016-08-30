@@ -2,6 +2,8 @@ package kode.boot.testjar;
 
 import kode.boot.testjar.config.DataConfig;
 import kode.boot.testjar.config.ServletConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -24,27 +26,29 @@ import java.util.Arrays;
 @Import({ServletConfig.class, DataConfig.class, ServletConfig.class})
 public class Application extends SpringBootServletInitializer implements CommandLineRunner {
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return super.configure(builder);
-    }
+	private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    public static void main(String[] args) {
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return super.configure(builder);
+	}
 
-        ApplicationContext app = new SpringApplicationBuilder(Application.class)
-                .bannerMode(Banner.Mode.OFF)
-                .build()
-                .run(args);
+	public static void main(String[] args) {
 
-        String[] beanNames = app.getBeanDefinitionNames();
-        Arrays.sort(beanNames);
-        for (String bean : beanNames) {
-            System.out.println(bean);
-        }
-    }
+		ApplicationContext app = new SpringApplicationBuilder(Application.class)
+				.bannerMode(Banner.Mode.OFF)
+				.build()
+				.run(args);
 
-    @Override
-    public void run(String... args) throws Exception {
+		String[] beanNames = app.getBeanDefinitionNames();
+		Arrays.sort(beanNames);
+		for (String bean : beanNames) {
+			logger.info(bean);
+		}
+	}
 
-    }
+	@Override
+	public void run(String... args) throws Exception {
+
+	}
 }
