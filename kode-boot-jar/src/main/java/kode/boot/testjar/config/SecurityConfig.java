@@ -1,31 +1,24 @@
 package kode.boot.testjar.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
- * Created by Stark on 2016/8/16.
- * <p>
- * <pre>
- *
- *     <http auto-config="true">
- *
- *     </http>
- *
- *
- *
- * </pre>
+ * 安全信息配置
  *
  * @author Stark
  * @since 1.0
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -57,12 +50,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // 请求授权
                 .authorizeRequests()
-                    .antMatchers("/", "/home").permitAll()
+//                    .antMatchers("/", "/home", "/test").permitAll()
                     .anyRequest().authenticated()
+                    .expressionHandler(null)
 
-                // form 登陆
+
+                // form 登陆，必须保证登陆页面
                 .and().formLogin()
                     .loginPage("/login").permitAll()
+
+                .and().exceptionHandling()
+                    .accessDeniedPage("/access_denied")
 
                 // 退出过滤器
                 .and().logout()
@@ -77,7 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // 配置端口隐射
                 .and().portMapper()
-                    .http(8000).mapsTo(8443)
+                    .http(8080).mapsTo(8443)
                     .http(80).mapsTo(443)
 
                 // session 管理

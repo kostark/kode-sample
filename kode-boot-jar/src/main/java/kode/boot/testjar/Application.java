@@ -21,7 +21,7 @@ import java.util.Arrays;
  */
 @EnableAutoConfiguration
 @SpringBootApplication
-@Import({ServletConfig.class, DataConfig.class})
+@Import({ServletConfig.class, DataConfig.class, ServletConfig.class})
 public class Application extends SpringBootServletInitializer implements CommandLineRunner {
 
     @Override

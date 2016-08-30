@@ -12,6 +12,8 @@ Message: ${message}
 User count: ${userCount!0}
 <br/>
 Date: ${date?datetime}
+<br/>
+UserStatus: ${userStatus!-1}
 
 <div>
 <@spring.message "web.label.username"/>: <input type="text" placeholder="<@spring.message "web.label.username"/>">
