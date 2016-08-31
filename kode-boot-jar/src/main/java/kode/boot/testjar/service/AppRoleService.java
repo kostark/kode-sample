@@ -1,6 +1,6 @@
 package kode.boot.testjar.service;
 
-import kode.boot.testjar.domain.AppAuth;
+import kode.boot.testjar.domain.AppResource;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @since 2016/8/30
  */
 public interface AppRoleService {
-    List<AppAuth> getAuthByRoleId(long roleId);
+    List<AppResource> getAuthByRoleId(long roleId);
 
 
 }

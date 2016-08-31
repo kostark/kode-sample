@@ -1,6 +1,6 @@
 package kode.boot.testjar.security;
 
-import kode.boot.testjar.domain.AppAuth;
+import kode.boot.testjar.domain.AppResource;
 import kode.boot.testjar.domain.AppUser;
 import kode.boot.testjar.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class CustomUserDetailService implements UserDetailsService {
 		if (user == null)
 			throw new UsernameNotFoundException("didn't found user with name '" + username + "'");
 
-		List<AppAuth> auth = appUserService.findAuth(user.getId());
+		List<AppResource> auth = appUserService.findAuth(user.getId());
 		return new User(user.getUsername(), user.getPassword(), true, true, true, true, auth);
 	}
 

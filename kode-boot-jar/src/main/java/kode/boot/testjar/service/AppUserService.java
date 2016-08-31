@@ -1,6 +1,6 @@
 package kode.boot.testjar.service;
 
-import kode.boot.testjar.domain.AppAuth;
+import kode.boot.testjar.domain.AppResource;
 import kode.boot.testjar.domain.AppUser;
 
 import java.util.List;
@@ -15,5 +15,5 @@ public interface AppUserService {
 
 	AppUser findUserByUsername(String username);
 
-	List<AppAuth> findAuth(long userId);
+	List<AppResource> findAuth(long userId);
 }

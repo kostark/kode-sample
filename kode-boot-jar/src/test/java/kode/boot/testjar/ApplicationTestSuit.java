@@ -1,7 +1,7 @@
 package kode.boot.testjar;
 
 import kode.boot.testjar.controller.HomeControllerTest;
-import kode.boot.testjar.domain.AppAuthTest;
+import kode.boot.testjar.domain.AppResourceTest;
 import kode.boot.testjar.service.AppUserServiceImplTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -13,6 +13,6 @@ import org.junit.runners.Suite;
  * @since 1.0
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({AppUserServiceImplTest.class, HomeControllerTest.class, AppAuthTest.class})
+@Suite.SuiteClasses({AppUserServiceImplTest.class, HomeControllerTest.class, AppResourceTest.class})
 public class ApplicationTestSuit {
 }

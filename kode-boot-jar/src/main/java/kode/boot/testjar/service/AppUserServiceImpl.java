@@ -1,9 +1,10 @@
 package kode.boot.testjar.service;
 
-import kode.boot.testjar.domain.AppAuth;
+import kode.boot.testjar.domain.AppResource;
 import kode.boot.testjar.domain.AppUser;
 import kode.boot.testjar.mapper.AppUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -44,6 +45,7 @@ public class AppUserServiceImpl extends AppBaseService implements AppUserService
 	}
 
 	@Override
+	@PreAuthorize("hasAuthority('koweb.user.delete')")
 	public int countAllUser() {
 		int count = userRepo.size();
 		logger.debug("{}: {}", "count", count);
@@ -60,11 +62,18 @@ public class AppUserServiceImpl extends AppBaseService implements AppUserService
 	}
 
 	@Override
-	public List<AppAuth> findAuth(long userId) {
+	public List<AppResource> findAuth(long userId) {
 		if (userId == 1) {
-			return Arrays.asList(AppAuth.UserQuery, AppAuth.UserCreate, AppAuth.UserModify, AppAuth.UserDelete, AppAuth.UserRoleQuery);
+			return Arrays.asList(
+					AppResource.from(AppResource.USER_QUERY),
+					AppResource.from(AppResource.USER_CREATE),
+					AppResource.from(AppResource.USER_MODIFY),
+					AppResource.from(AppResource.USER_DELETE),
+					AppResource.from(AppResource.USERROLE_QUERY));
 		} else if (userId == 2) {
-			return Arrays.asList(AppAuth.UserQuery, AppAuth.UserRoleQuery);
+			return Arrays.asList(
+					AppResource.from(AppResource.USER_QUERY),
+					AppResource.from(AppResource.USERROLE_QUERY));
 		} else {
 			return Collections.emptyList();
 		}

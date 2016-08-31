@@ -1,6 +1,6 @@
 package kode.boot.testjar.service;
 
-import kode.boot.testjar.domain.AppAuth;
+import kode.boot.testjar.domain.AppResource;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class AppRoleServiceImpl extends AppBaseService implements AppRoleService {
 	@Override
-	public List<AppAuth> getAuthByRoleId(long roleId) {
-		return Arrays.asList(AppAuth.UserCreate, AppAuth.UserModify);
+	public List<AppResource> getAuthByRoleId(long roleId) {
+		return Arrays.asList(AppResource.from(AppResource.USER_CREATE), AppResource.from(AppResource.USER_MODIFY));
 	}
 }
