@@ -3,31 +3,29 @@ package kode.boot.testjar.security;
 import kode.boot.testjar.domain.AppAuth;
 import kode.boot.testjar.domain.AppUser;
 import kode.boot.testjar.service.AppUserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
- * Created by Stark on 2016/8/17.
+ * 自定义用户服务
+ * 主要作用是为 Spring Security 提供一个经过用户认证后的 UserDetails。
+ * 该 UserDetails 包括用户名、密码、是否可用、是否过期等信息。
  *
  * @author Stark
  * @since 1.0
  */
-@Service
+@Component
 public class CustomUserDetailService implements UserDetailsService {
 
 	private AppUserService appUserService;
 
-	@Autowired
-	public CustomUserDetailService(AppUserService appUserService) {
-		this.appUserService = appUserService;
+	public CustomUserDetailService(AppUserService userService) {
+		this.appUserService = userService;
 	}
 
 	@Override
@@ -38,5 +36,13 @@ public class CustomUserDetailService implements UserDetailsService {
 
 		List<AppAuth> auth = appUserService.findAuth(user.getId());
 		return new User(user.getUsername(), user.getPassword(), true, true, true, true, auth);
+	}
+
+	public AppUserService getAppUserService() {
+		return appUserService;
+	}
+
+	public void setAppUserService(AppUserService appUserService) {
+		this.appUserService = appUserService;
 	}
 }
