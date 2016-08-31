@@ -3,14 +3,16 @@ package kode.boot.testjar.security;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDecisionManager;
+import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
+import org.springframework.security.access.vote.AbstractAccessDecisionManager;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * 访问决策管理器
@@ -21,10 +23,13 @@ import java.util.Collection;
  * @author Stark
  * @since 1.0
  */
-@Component
-public class CustomAccessDecisionManager implements AccessDecisionManager {
+public class CustomAccessDecisionManager extends AbstractAccessDecisionManager implements AccessDecisionManager {
 
 	private final Logger logger = LoggerFactory.getLogger(CustomAccessDecisionManager.class);
+
+	public CustomAccessDecisionManager(List<AccessDecisionVoter<? extends Object>> decisionVoters) {
+		super(decisionVoters);
+	}
 
 	@Override
 	public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes)

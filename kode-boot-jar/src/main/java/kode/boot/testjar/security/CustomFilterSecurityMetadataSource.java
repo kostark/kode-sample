@@ -19,7 +19,7 @@ import java.util.*;
  * @since 1.0
  */
 @Component
-public class CustomSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
+public class CustomFilterSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -27,7 +27,7 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
 
 	private static Map<String, Collection<ConfigAttribute>> resourceMap = new LinkedHashMap<>();
 
-	public CustomSecurityMetadataSource() {
+	public CustomFilterSecurityMetadataSource() {
 		logger.debug("===== CustomSecurityMetadataSource.<init>");
 		loadResource();
 		logger.debug("===== 初始化资源文件映射");

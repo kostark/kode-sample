@@ -3,6 +3,7 @@ package kode.boot.testjar.security;
 import kode.boot.testjar.domain.AppAuth;
 import kode.boot.testjar.domain.AppUser;
 import kode.boot.testjar.service.AppUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,11 +23,12 @@ import java.util.List;
 @Component
 public class CustomUserDetailService implements UserDetailsService {
 
+	@Autowired
 	private AppUserService appUserService;
 
-	public CustomUserDetailService(AppUserService userService) {
-		this.appUserService = userService;
-	}
+//	public CustomUserDetailService(AppUserService userService) {
+//		this.appUserService = userService;
+//	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
