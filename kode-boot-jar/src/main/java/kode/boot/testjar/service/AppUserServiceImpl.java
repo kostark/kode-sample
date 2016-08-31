@@ -62,7 +62,7 @@ public class AppUserServiceImpl extends AppBaseService implements AppUserService
 	}
 
 	@Override
-	public List<AppResource> findAuth(long userId) {
+	public List<AppResource> findResources(long userId) {
 		if (userId == 1) {
 			return Arrays.asList(
 					AppResource.from(AppResource.USER_QUERY),

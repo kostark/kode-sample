@@ -4,6 +4,7 @@ import kode.boot.testjar.security.CustomAccessDecisionManager;
 import kode.boot.testjar.security.CustomFilterSecurityInterceptor;
 import kode.boot.testjar.security.CustomFilterSecurityMetadataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -11,6 +12,7 @@ import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.intercept.RunAsManager;
 import org.springframework.security.access.intercept.RunAsManagerImpl;
 import org.springframework.security.access.vote.RoleVoter;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.ReflectionSaltSource;
 import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -45,10 +47,7 @@ public class SecurityConfig {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		// @formatter:off
-		//auth.inMemoryAuthentication().withUser("u").password("p");
 		auth.userDetailsService(userDetailsService);
-		// @formatter:on
 	}
 
 	@Bean
@@ -63,17 +62,18 @@ public class SecurityConfig {
 		return manager;
 	}
 
-//	@Bean
-//	public CustomFilterSecurityInterceptor securityInterceptor() throws Exception {
-//		CustomFilterSecurityInterceptor interceptor = new CustomFilterSecurityInterceptor();
-//		interceptor.setAccessDecisionManager(accessDecisionManager());
-//		interceptor.setAuthenticationManager(authenticationManager());
-//		interceptor.setSecurityMetadataSource(securityMetadataSource());
-//		interceptor.setRunAsManager(runAsManager());
-//		interceptor.afterPropertiesSet();
-//
-//		return interceptor;
-//	}
+
+	//	@Bean
+	public CustomFilterSecurityInterceptor securityInterceptor() throws Exception {
+		CustomFilterSecurityInterceptor interceptor = new CustomFilterSecurityInterceptor();
+//		interceptor.setAuthenticationManager(authenticationManager);
+		interceptor.setAccessDecisionManager(accessDecisionManager());
+		interceptor.setSecurityMetadataSource(securityMetadataSource());
+		interceptor.setRunAsManager(null);
+		interceptor.afterPropertiesSet();
+
+		return interceptor;
+	}
 
 	@Bean
 	public CustomFilterSecurityMetadataSource securityMetadataSource() {
@@ -88,18 +88,18 @@ public class SecurityConfig {
 		return runAsManager;
 	}
 
-	@Bean
+/*	@Bean
 	public SaltSource saltSource() throws Exception {
 		ReflectionSaltSource saltSource = new ReflectionSaltSource();
 		saltSource.setUserPropertyToUse("salt");
 		saltSource.afterPropertiesSet();
 		return saltSource;
-	}
+	}*/
 
-	@Bean
+/*	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
-	}
+	}*/
 
 	/**
 	 * Api 调用安全设置
@@ -107,11 +107,23 @@ public class SecurityConfig {
 	@Configuration
 	@Order(1)
 	public static class ApiSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+
+		@Autowired
+		@Qualifier("userDetailsService")
+		private UserDetailsService userDetailsService;
+
+		/** Api 调用 api 专用的用户服务 */
+		@Override
+		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+			auth.userDetailsService(userDetailsService);
+		}
+
 		protected void configure(HttpSecurity http) throws Exception {
+			// 所有 api 接口调用
 			http
 					.antMatcher("/api/**")
 					.authorizeRequests()
-					.anyRequest().hasRole("ADMIN")
+					.anyRequest().authenticated()
 					.and()
 					.httpBasic();
 		}
@@ -122,6 +134,16 @@ public class SecurityConfig {
 	 */
 	@Configuration // no @Order defaults to last
 	public static class FormWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+
+		@Autowired
+		@Qualifier("userDetailsService")
+		private UserDetailsService userDetailsService;
+
+		/** Form 调用用户服务 */
+		@Override
+		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+			auth.userDetailsService(userDetailsService);
+		}
 
 		@Override
 		public void configure(WebSecurity web) throws Exception {
@@ -135,6 +157,7 @@ public class SecurityConfig {
 					"/**/*.ico");
 		}
 
+
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			// 该方法用来配置 HttpSecurity，不要调用 super.configure(http)，否则有可能覆盖自定义配置
@@ -146,23 +169,14 @@ public class SecurityConfig {
 					.csrf()
 					.disable()
 
-//					.addFilterBefore(securityInterceptor(), FilterSecurityInterceptor.class)
-
-                /*
-				.antMatcher("")
-                .requestMatchers()
-                    .antMatchers("")
-                .and()
-                */
-
+					// .addFilterBefore(securityInterceptor(), FilterSecurityInterceptor.class)
 
 					// 请求授权
 					.authorizeRequests()
-//					.accessDecisionManager(accessDecisionManager())
-//                    .antMatchers("/", "/home", "/test").permitAll()
+//					.accessDecisionManager(accessDecisionManager)
+//                  .antMatchers("/", "/home", "/test").permitAll()
 					.anyRequest().authenticated()
 					.expressionHandler(null)
-
 
 					// form 登陆，必须保证登陆页面
 					.and().formLogin()

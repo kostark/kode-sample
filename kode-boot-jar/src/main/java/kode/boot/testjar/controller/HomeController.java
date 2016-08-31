@@ -1,9 +1,10 @@
 package kode.boot.testjar.controller;
 
+import kode.boot.testjar.domain.AppResource;
 import kode.boot.testjar.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +17,6 @@ import java.util.Date;
  */
 @Controller
 public class HomeController {
-
-	public static final String USER_CREATE_AUTH = "koweb.user.create";
 
 	//从配置文件中读取配置
 	@Value("${name}")
@@ -49,7 +48,7 @@ public class HomeController {
 		return "index";
 	}
 
-	@PreAuthorize("hasAuthority('" + USER_CREATE_AUTH + "')")
+	@Secured(AppResource.USER_CREATE)
 	@RequestMapping("test")
 	String test(Model model) {
 		model.addAttribute("message", "Hello world! ============== test sample ||| " + desc + " | test = " + test + " | devName = ");

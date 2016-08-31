@@ -15,5 +15,5 @@ public interface AppUserService {
 
 	AppUser findUserByUsername(String username);
 
-	List<AppResource> findAuth(long userId);
+	List<AppResource> findResources(long userId);
 }

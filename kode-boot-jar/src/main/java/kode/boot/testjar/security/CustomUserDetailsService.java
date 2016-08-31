@@ -20,15 +20,11 @@ import java.util.List;
  * @author Stark
  * @since 1.0
  */
-@Component
-public class CustomUserDetailService implements UserDetailsService {
+@Component("userDetailsService")
+public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private AppUserService appUserService;
-
-//	public CustomUserDetailService(AppUserService userService) {
-//		this.appUserService = userService;
-//	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -36,7 +32,7 @@ public class CustomUserDetailService implements UserDetailsService {
 		if (user == null)
 			throw new UsernameNotFoundException("didn't found user with name '" + username + "'");
 
-		List<AppResource> auth = appUserService.findAuth(user.getId());
+		List<AppResource> auth = appUserService.findResources(user.getId());
 		return new User(user.getUsername(), user.getPassword(), true, true, true, true, auth);
 	}
 
