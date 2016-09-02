@@ -11,7 +11,7 @@ import org.springframework.security.core.Authentication;
  * @author Stark
  * @since 1.0
  */
-public class CustomMethodSecurityExpressionOperations extends SecurityExpressionRoot implements MethodSecurityExpressionOperations {
+public class CustomMethodSecurityExpressionRoot extends SecurityExpressionRoot implements MethodSecurityExpressionOperations {
 
 	private Object filterObject;
 	private Object returnObject;
@@ -22,7 +22,7 @@ public class CustomMethodSecurityExpressionOperations extends SecurityExpression
 	 *
 	 * @param authentication the {@link Authentication} to use. Cannot be null.
 	 */
-	public CustomMethodSecurityExpressionOperations(Authentication authentication) {
+	public CustomMethodSecurityExpressionRoot(Authentication authentication) {
 		super(authentication);
 	}
 
