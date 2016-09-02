@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
-import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 
 import java.util.*;
@@ -18,13 +17,10 @@ import java.util.*;
  * @author Stark
  * @since 1.0
  */
-@Component
 public class CustomFilterSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
-
 	private AntPathMatcher urlMatcher = new AntPathMatcher();
-
 	private static Map<String, Collection<ConfigAttribute>> resourceMap = new LinkedHashMap<>();
 
 	public CustomFilterSecurityMetadataSource() {

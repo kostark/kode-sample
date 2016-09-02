@@ -12,7 +12,8 @@ import java.util.Collection;
  * @author Stark
  * @since 1.0
  */
-public class CustomAuthVoter implements AccessDecisionVoter {
+//TODO: 能够使用精简的授权语句，如 @PreAuthority('koweb.user.create' or 'koweb.user.query')
+public class CustomResourceVoter implements AccessDecisionVoter {
 
 	@Override
 	public boolean supports(ConfigAttribute attribute) {

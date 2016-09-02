@@ -23,7 +23,6 @@ import java.io.IOException;
 public class CustomFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
-
 	private FilterInvocationSecurityMetadataSource securityMetadataSource;
 
 	@Override

@@ -4,7 +4,7 @@ import kode.boot.testjar.domain.AppResource;
 import kode.boot.testjar.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,7 +48,8 @@ public class HomeController {
 		return "index";
 	}
 
-	@Secured(AppResource.USER_CREATE)
+	//	@Secured({AppResource.USER_CREATE, AppResource.USER_QUERY})
+	@PreAuthorize("hasAuthority('" + AppResource.USER_CREATE + "') or hasAuthority('" + AppResource.USER_QUERY + "')")
 	@RequestMapping("test")
 	String test(Model model) {
 		model.addAttribute("message", "Hello world! ============== test sample ||| " + desc + " | test = " + test + " | devName = ");
