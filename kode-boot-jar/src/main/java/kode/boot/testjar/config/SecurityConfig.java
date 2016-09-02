@@ -3,27 +3,25 @@ package kode.boot.testjar.config;
 import kode.boot.testjar.security.CustomAccessDecisionManager;
 import kode.boot.testjar.security.CustomFilterSecurityInterceptor;
 import kode.boot.testjar.security.CustomFilterSecurityMetadataSource;
+import kode.boot.testjar.security.CustomMethodSecurityExpressionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.access.AccessDecisionVoter;
+import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.access.intercept.RunAsManager;
 import org.springframework.security.access.intercept.RunAsManagerImpl;
 import org.springframework.security.access.vote.RoleVoter;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.ReflectionSaltSource;
-import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.expression.WebExpressionVoter;
 
 import java.util.ArrayList;
@@ -38,7 +36,6 @@ import java.util.List;
  */
 @Configuration
 @EnableWebSecurity // 开启安全验证
-@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true) // 开启全局方法安全验证
 public class SecurityConfig {
 
 	@Autowired
@@ -88,6 +85,11 @@ public class SecurityConfig {
 		return runAsManager;
 	}
 
+	@Bean
+	public CustomMethodSecurityExpressionHandler methodSecurityExpressionHandler() {
+		return new CustomMethodSecurityExpressionHandler();
+	}
+
 /*	@Bean
 	public SaltSource saltSource() throws Exception {
 		ReflectionSaltSource saltSource = new ReflectionSaltSource();
@@ -100,6 +102,18 @@ public class SecurityConfig {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}*/
+
+	/**
+	 * 方法权限安全设置
+	 */
+	@Configuration
+	@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true) // 开启全局方法安全验证
+	public static class GlobalSecurityConfiguration extends GlobalMethodSecurityConfiguration {
+		@Override
+		protected MethodSecurityExpressionHandler createExpressionHandler() {
+			return new CustomMethodSecurityExpressionHandler();
+		}
+	}
 
 	/**
 	 * Api 调用安全设置

@@ -3,6 +3,12 @@ package kode.boot.testjar.security;
 import org.springframework.security.access.expression.SecurityExpressionRoot;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionOperations;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 自定义权限表达式处理器
@@ -16,6 +22,7 @@ public class CustomMethodSecurityExpressionRoot extends SecurityExpressionRoot i
 	private Object filterObject;
 	private Object returnObject;
 	private Object target;
+	private Set<String> roles;
 
 	/**
 	 * Creates a new instance
@@ -27,11 +34,20 @@ public class CustomMethodSecurityExpressionRoot extends SecurityExpressionRoot i
 	}
 
 	public boolean has(String permission) {
-		if ("user.edit".equals(permission))
-			return true;
-		else
-			return false;
+		return getAuthoritySet().contains(permission);
 	}
+
+	private Set<String> getAuthoritySet() {
+		if (roles == null) {
+			roles = new HashSet<>();
+			Collection<? extends GrantedAuthority> userAuthorities = authentication.getAuthorities();
+
+			roles = AuthorityUtils.authorityListToSet(userAuthorities);
+		}
+
+		return roles;
+	}
+
 
 	public void setFilterObject(Object filterObject) {
 		this.filterObject = filterObject;
@@ -47,6 +63,10 @@ public class CustomMethodSecurityExpressionRoot extends SecurityExpressionRoot i
 
 	public Object getReturnObject() {
 		return returnObject;
+	}
+
+	void setThis(Object target) {
+		this.target = target;
 	}
 
 	public Object getThis() {

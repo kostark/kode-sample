@@ -72,6 +72,7 @@ public class HomeController {
 		return "login";
 	}
 
+	@PreAuthorize("has('" + AppResource.USER_CREATE + "')")
 	@RequestMapping("create")
 	String create() {
 		return "test";

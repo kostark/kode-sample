@@ -1,8 +1,12 @@
 package kode.boot.testjar.security;
 
+import org.aopalliance.intercept.MethodInvocation;
+import org.springframework.expression.EvaluationContext;
+import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionOperations;
+import org.springframework.security.authentication.AuthenticationTrustResolver;
+import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 
 /**
  * 自定义权限表达式处理器
@@ -11,109 +15,23 @@ import org.springframework.security.web.access.expression.DefaultWebSecurityExpr
  * @author Stark
  * @since 1.0
  */
-public class CustomMethodSecurityExpressionHandler extends DefaultWebSecurityExpressionHandler implements MethodSecurityExpressionOperations {
+public class CustomMethodSecurityExpressionHandler extends DefaultMethodSecurityExpressionHandler {
 
-	private Object filterObject;
-	private Object returnObject;
-	private Object target;
+	private final AuthenticationTrustResolver trustResolver = new AuthenticationTrustResolverImpl();
 
-	/**
-	 * Creates a new instance
-	 *
-	 * @param authentication the {@link Authentication} to use. Cannot be null.
-	 */
-	public CustomMethodSecurityExpressionHandler(Authentication authentication) {
-	}
-
-	public boolean has(String permission) {
-		if ("user.edit".equals(permission))
-			return true;
-		else
-			return false;
-	}
-
-	public void setFilterObject(Object filterObject) {
-		this.filterObject = filterObject;
-	}
-
-	public Object getFilterObject() {
-		return filterObject;
-	}
-
-	public void setReturnObject(Object returnObject) {
-		this.returnObject = returnObject;
-	}
-
-	public Object getReturnObject() {
-		return returnObject;
-	}
-
-	public Object getThis() {
-		return target;
+	public void setReturnObject(Object returnObject, EvaluationContext ctx) {
+		((MethodSecurityExpressionOperations) ctx.getRootObject().getValue()).setReturnObject(returnObject);
 	}
 
 	@Override
-	public Authentication getAuthentication() {
-		return null;
-	}
+	protected MethodSecurityExpressionOperations createSecurityExpressionRoot(
+			Authentication authentication, MethodInvocation invocation) {
+		final CustomMethodSecurityExpressionRoot root = new CustomMethodSecurityExpressionRoot(authentication);
+		root.setThis(invocation.getThis());
+		root.setPermissionEvaluator(getPermissionEvaluator());
+		root.setTrustResolver(this.trustResolver);
+		root.setRoleHierarchy(getRoleHierarchy());
 
-	@Override
-	public boolean hasAuthority(String authority) {
-		return false;
-	}
-
-	@Override
-	public boolean hasAnyAuthority(String... authorities) {
-		return false;
-	}
-
-	@Override
-	public boolean hasRole(String role) {
-		return false;
-	}
-
-	@Override
-	public boolean hasAnyRole(String... roles) {
-		return false;
-	}
-
-	@Override
-	public boolean permitAll() {
-		return false;
-	}
-
-	@Override
-	public boolean denyAll() {
-		return false;
-	}
-
-	@Override
-	public boolean isAnonymous() {
-		return false;
-	}
-
-	@Override
-	public boolean isAuthenticated() {
-		return false;
-	}
-
-	@Override
-	public boolean isRememberMe() {
-		return false;
-	}
-
-	@Override
-	public boolean isFullyAuthenticated() {
-		return false;
-	}
-
-	@Override
-	public boolean hasPermission(Object target, Object permission) {
-		return false;
-	}
-
-	@Override
-	public boolean hasPermission(Object targetId, String targetType, Object permission) {
-		return false;
+		return root;
 	}
 }
