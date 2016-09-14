@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("api")
 public class ApiOrderController {
 
-	@ResponseBody
-	@RequestMapping(params = {"method=api.order.get"})
-	public String getUserInfo(HttpServletRequest request) {
-		return "api.order.get";
-	}
+    @ResponseBody
+    @RequestMapping(params = {"method=api.order.get"})
+    public String getUserInfo(HttpServletRequest request) {
+        return "api.order.get";
+    }
 
 }

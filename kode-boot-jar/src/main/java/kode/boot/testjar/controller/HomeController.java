@@ -1,9 +1,15 @@
 package kode.boot.testjar.controller;
 
+import kode.boot.testjar.domain.AppResource;
+import kode.boot.testjar.service.AppUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Date;
 
 /**
  * @version 1.0
@@ -22,24 +28,53 @@ public class HomeController {
 	@Value("${test:defaultTestValue}")
 	private String test;
 
-/*	@Autowired
-	IUserService userService;
-
 	@Autowired
-	DataSource dataSource;*/
+	private AppUserService appUserService;
+
+//	@Autowired
+//	public HomeController(AppUserService userService) {
+//		this.appUserService = userService;
+//	}
 
 	@RequestMapping("/")
 	String home(Model model) {
 		model.addAttribute("message", "Hello world! <br/>"
 				+ "desc: " + desc + "<br/>" +
 				"test: " + test);
-//		model.addAttribute("userCount", userService.countAllUser());
+		model.addAttribute("userCount", appUserService.countAllUser());
+		model.addAttribute("date", new Date());
+		model.addAttribute("userStatus", 3);
+
 		return "index";
 	}
 
+	//	@Secured({AppResource.USER_CREATE, AppResource.USER_QUERY})
+	@PreAuthorize("hasAuthority('" + AppResource.USER_CREATE + "') or hasAuthority('" + AppResource.USER_QUERY + "')")
 	@RequestMapping("test")
 	String test(Model model) {
 		model.addAttribute("message", "Hello world! ============== test sample ||| " + desc + " | test = " + test + " | devName = ");
+		return "test";
+	}
+
+	@RequestMapping("access_denied")
+	String accessDenied(Model model) {
+		model.addAttribute("message", "您无此权限，请求被拒绝。");
+		return "test";
+	}
+
+	@RequestMapping("hello")
+	String hello() {
+		return "test";
+	}
+
+	@RequestMapping("login")
+	String login() {
+		return "login";
+	}
+
+	@PreAuthorize("has('" + AppResource.USER_CREATE + "')")
+	@RequestMapping("create")
+	String create() {
 		return "test";
 	}
 }

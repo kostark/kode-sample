@@ -4,24 +4,42 @@ name: Kode-sample-project
 desc: ${name}, perfect!
 test: I'm test value from application.properties.
 
+# 服务器相关配置
 server:
-  port: 8000 # 服务端口，用来和 tomcat 默认端口区分
+  port: 8443
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: KoStark_99
+    key-store-type: PKCS12
+    key-alias: tomcat
+  session:
+    timeout: 1800
+  context-path: /
+
 
 # 在配置文件中的读取，从自动装配的库中查找默认配置，然后覆盖默认配置的值
 spring:
+  mvc:
+    locale: zh
   freemarker:
-    # 设置模版加载路径
-    templateLoaderPath:
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: request
+    template-loader-path:
       - classpath:/views/
-      # 这样的配置只能在使用 gradle 内的插件时才能生效。
-      # 很好理解，因为这部分资源文件只有在经过 gradle 处理之后才会被复制到 classpath下，才能被解析到。
-      # 如果直接运行 main 方法入口是不能解析该文件夹内的页面的。
-      # - webapp/views/
-
+    settings:
+      datetime_format: yyyy/MM/dd HH:mm:ss
+      url_escaping_charset: UTF-8
+      auto_import: /spring.ftl as spring, _core/widget.ftl as widget
   datasource:
-    driverClassName: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test_mybatis
     username: root
-    password: root
+    password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
+  messages:
+    basename: i18n/message
+
+
+
 

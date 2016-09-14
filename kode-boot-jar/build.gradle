@@ -40,6 +40,8 @@ task outputDirs << {
 
 //当前项目内的依赖
 dependencies {
+    compile 'org.webjars:jquery:1.12.4'
+    compile "org.springframework.boot:spring-boot-starter-security:${springBootVersion}"
     compile "org.mybatis:mybatis:${mybatisVersion}"
     compile "mysql:mysql-connector-java:${mysqlConnector}"
     compile "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
