@@ -3,4 +3,7 @@ include 'kode-sample-web'
 include 'kode-sample-sdk'
 include 'kode-boot-jar'
 include 'kode-static-web'
+include 'pay-center:kode-pay-sdk'
+findProject(':pay-center:kode-pay-sdk')?.name = 'kode-pay-sdk'
+include 'common'
 
