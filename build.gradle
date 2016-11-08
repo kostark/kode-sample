@@ -17,6 +17,7 @@ buildscript {
     }
 
     repositories {
+        maven { url 'http://maven.aliyun.com/nexus' }
         jcenter()
         //maven { url "http://repo.spring.io/snapshot" }
         //maven { url "http://repo.spring.io/milestone" }
@@ -62,7 +63,10 @@ allprojects {
     //全局仓库定义
     repositories {
         //本地 maven 仓库
+
         mavenLocal()
+
+        maven { url 'http://maven.aliyun.com/nexus' }
 
         //配置 OSChina 的 maven 库，现维护不能正常使用
         //maven { url 'http://maven.oschina.net/content/groups/public/' }

@@ -1,13 +1,17 @@
 package kode.boot.testjar.controller;
 
 import kode.boot.testjar.domain.AppResource;
+import kode.boot.testjar.domain.Product;
 import kode.boot.testjar.service.AppUserService;
+import org.elasticsearch.node.NodeBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 
@@ -76,5 +80,20 @@ public class HomeController {
 	@RequestMapping("create")
 	String create() {
 		return "test";
+	}
+
+	@ResponseBody
+	@RequestMapping("/es/{id}")
+	String testElastic(@PathVariable Long id) {
+		Product product = new Product();
+		product.setId(id);
+		product.setName("productName " + id);
+		product.setDescription("productDescription " + id);
+
+
+		NodeBuilder nodeBuilder = NodeBuilder.nodeBuilder();
+
+
+		return "";
 	}
 }

@@ -47,6 +47,8 @@ dependencies {
     compile "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
     compile "com.alibaba:druid:${druidVersion}"
     compile "org.springframework:spring-jdbc:${springVersion}"
+    compile 'org.elasticsearch:elasticsearch:2.4.1'
+
     compile("org.hibernate:hibernate-validator:${hibernateValidation}") {
         exclude module: 'org.jboss.logging:jboss-logging'
     }
