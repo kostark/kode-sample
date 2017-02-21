@@ -188,8 +188,8 @@ public class SecurityConfig {
 					// 请求授权
 					.authorizeRequests()
 //					.accessDecisionManager(accessDecisionManager)
-//                  .antMatchers("/", "/home", "/test").permitAll()
-					.anyRequest().authenticated()
+//					.antMatchers("/", "/home", "/test").permitAll()
+					.anyRequest().permitAll()
 					.expressionHandler(null)
 
 					// form 登陆，必须保证登陆页面

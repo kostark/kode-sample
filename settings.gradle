@@ -6,4 +6,5 @@ include 'kode-static-web'
 include 'pay-center:kode-pay-sdk'
 findProject(':pay-center:kode-pay-sdk')?.name = 'kode-pay-sdk'
 include 'common'
+include 'spring-data-jpa-test'
 

@@ -12,23 +12,22 @@ artifacts {
 }
 
 //上传到nexus
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: "http://192.168.31.121:8011/repository/maven-releases/") {
-                authentication(userName: "admin", password: "admin123")
-            }
-            pom.version = "$project.version"
-            pom.artifactId = "$artifactId"
-            pom.groupId = "$project.group"
-        }
-    }
-}
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            repository(url: "http://192.168.31.121:8011/repository/maven-releases/") {
+//                authentication(userName: "admin", password: "admin123")
+//            }
+//            pom.version = "$project.version"
+//            pom.artifactId = "$artifactId"
+//            pom.groupId = "$project.group"
+//        }
+//    }
+//}
 
 repositories {
-    maven { url "http://192.168.31.121:8011/repository/maven-releases/" }
+//    maven { url "http://192.168.31.121:8011/repository/maven-releases/" }
 }
 
 dependencies {
-    compile "kode:kode-sample-sdk-test:1.0.0"
 }
