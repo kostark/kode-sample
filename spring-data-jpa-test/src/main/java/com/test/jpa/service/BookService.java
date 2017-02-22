@@ -12,7 +12,7 @@ public interface BookService {
 	public List<Book> findAll();
 	public void saveBook(Book book);
 
-	@Cacheable(value = "books", cacheManager = "default")
+	@Cacheable(value = "books", key="#id")
 	public Book findOne(long id);
 	public void delete(long id);
 	public List<Book> findByName(String name);

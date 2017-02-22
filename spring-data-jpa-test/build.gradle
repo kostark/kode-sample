@@ -1,0 +1,12 @@
+dependencies {
+
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:${springDataJpaVersion}",
+            "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
+            "org.springframework.boot:spring-boot-starter-cache:${springBootVersion}",
+            "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+
+    compile("com.h2database:h2:+",
+            "net.sf.ehcache:ehcache:+")
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}

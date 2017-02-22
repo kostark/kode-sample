@@ -4,6 +4,7 @@ import com.test.jpa.domain.Book;
 import com.test.jpa.repository.BookOwnRepository;
 import com.test.jpa.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,9 +52,14 @@ public class BookServiceImpl implements BookService {
 	public void saveBook(Book book) {
 		bookRepository.save(book);
 	}
-
+	@Cacheable(value = "books", key="#id")
 	public Book findOne(long id) {
 		System.out.println("Cached Pages");
+		try {
+			Thread.sleep(1000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return bookRepository.findOne(id);
 	}
 
