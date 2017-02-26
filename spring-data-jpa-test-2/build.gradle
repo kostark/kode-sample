@@ -1,0 +1,19 @@
+description = "测试 spring-data-jpa 结合 mysql"
+
+apply plugin: 'spring-boot'
+
+dependencies {
+
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:${springDataJpaVersion}",
+            "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
+            "org.springframework.boot:spring-boot-starter-cache:${springBootVersion}",
+            "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+
+    compile("com.zaxxer:HikariCP:2.6.0",
+            "mysql:mysql-connector-java:${mysqlConnector}")
+
+//    compile("com.h2database:h2:+",
+//            "net.sf.ehcache:ehcache:+")
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
