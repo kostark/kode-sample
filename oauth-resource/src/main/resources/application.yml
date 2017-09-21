@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: oauth-resource
+
+server:
+  port: 9000
