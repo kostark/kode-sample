@@ -30,7 +30,6 @@ dependencies {
 //    compile "com.squareup.retrofit2:converter-jackson:${retrofitVersion}"
     compile "com.squareup.retrofit2:converter-scalars:${retrofitVersion}"
     compile "io.jmnarloch:rxjava-spring-boot-starter:2.0.0"
-    compile "net.sf.dozer:dozer:${dozerVersion}"
 
     compile "org.projectlombok:lombok:${lombokVersion}"
     compile "com.zaxxer:HikariCP:${hikariCPVersion}"
