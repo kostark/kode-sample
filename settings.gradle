@@ -8,7 +8,5 @@ findProject(':pay-center:kode-pay-sdk')?.name = 'kode-pay-sdk'
 include 'common'
 include 'spring-data-jpa-test'
 include 'spring-data-jpa-test-2'
-include 'oauth-authorization'
-include 'oauth-resource'
-include 'oauth-client'
+include 'test-docker'
 
