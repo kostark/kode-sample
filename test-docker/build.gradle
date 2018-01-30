@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'spring-boot'
 
 sourceCompatibility = 1.8
 
@@ -6,8 +7,19 @@ repositories {
     mavenCentral()
 }
 
+bootRepackage {
+    doLast {
+        copy {
+            from 'build/libs'
+            into 'src/main/docker'
+        }
+    }
+}
+
 dependencies {
     // spring boot
+    compile "org.springframework.boot:spring-boot:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-autoconfigure:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-actuator:${springBootVersion}"
