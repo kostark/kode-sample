@@ -1,5 +1,4 @@
 apply plugin: 'java'
-apply plugin: 'spring-boot'
 
 sourceCompatibility = 1.8
 
@@ -7,7 +6,9 @@ repositories {
     mavenCentral()
 }
 
-bootRepackage {
+version '1.0.0'
+
+jar {
     doLast {
         copy {
             from 'build/libs'
@@ -18,8 +19,6 @@ bootRepackage {
 
 dependencies {
     // spring boot
-    compile "org.springframework.boot:spring-boot:${springBootVersion}"
-    compile "org.springframework.boot:spring-boot-autoconfigure:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-actuator:${springBootVersion}"

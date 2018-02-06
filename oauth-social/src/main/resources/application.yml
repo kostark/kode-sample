@@ -1,0 +1,18 @@
+security:
+  oauth2:
+    client:
+      clientId: 20cbcca251ea85da1a2e
+      clientSecret: d5025abf3d559b686ced6398361f6ba55e2f329a
+      accessTokenUri: https://github.com/login/oauth/access_token
+      userAuthorizationUri: https://github.com/login/oauth/authorize
+      tokenName: oauth_token
+      authenticationScheme: query
+      clientAuthenticationScheme: form
+      registered-redirect-uri: http://localhost:9001/user
+    resource:
+      userInfoUri: https://api.github.com/user
+server:
+  port: 9001
+
+  #    pre-established-redirect-uri: http://localhost:8090/login/github
+  #    use-current-uri: false
